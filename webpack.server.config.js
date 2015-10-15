@@ -1,4 +1,9 @@
 var path = require('path')
+var fs = require('fs')
+
+var nodeModules = fs.readdirSync('node_modules')
+  .filter(module => module !== '.bin')
+  .reduce((prev, module) => Object.assign(prev, {[module]: 'commonjs ' + module}), {})
 
 module.exports = {
   entry: [
@@ -23,5 +28,6 @@ module.exports = {
     buffer: false,
     __filename: false,
     __dirname: false
-  }
+  },
+  externals: nodeModules
 }

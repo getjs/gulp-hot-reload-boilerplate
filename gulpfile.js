@@ -3,7 +3,6 @@ var webpackStream = require('webpack-stream')
 var reload = require('gulp-hot-reload')
 var webpack = require('webpack')
 var gutil = require('gulp-util')
-var fs = require('fs')
 var path = require('path')
 
 const buildDone = (err, stats) => {
@@ -19,11 +18,6 @@ const buildDone = (err, stats) => {
 
 var serverConfig = require('./webpack.server.config.js')
 var frontendConfig = require('./webpack.config.js')
-
-var nodeModules = fs.readdirSync('node_modules')
-  .filter(module => module !== '.bin')
-  .reduce((prev, module) => Object.assign(prev, {[module]: 'commonjs ' + module}), {});
-serverConfig.externals = nodeModules
 
 gulp.task('build-backend', () => {
   gulp
