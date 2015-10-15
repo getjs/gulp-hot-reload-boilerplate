@@ -51,7 +51,9 @@ Application is bundled to **build/** folder. Client code and static assets are i
 
 ##How it works
 
+##src/server.js
 
+##gulpfile.js
 
 ##webpack.server.config.js
 
