@@ -1,5 +1,6 @@
 var gulp = require('gulp')
 var webpackStream = require('webpack-stream')
+//var reload = require('./../gulp-hot-reload/src/index')
 var reload = require('gulp-hot-reload')
 var webpack = require('webpack')
 var gutil = require('gulp-util')
@@ -24,6 +25,8 @@ gulp.task('build-backend', () => {
     .src('./src/server.js')
     .pipe(webpackStream(serverConfig, webpack, buildDone))
     .pipe(reload({
+      port: 1337,
+      react: true,
       config: path.join(__dirname, 'webpack.config.js')
     }))
 })
