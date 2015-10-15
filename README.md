@@ -27,7 +27,7 @@ webpack built 2887a3587be1d379be56 in 4468ms
 ```
 The program keeps running, as it watches for changes.
 
-###Test React hot reload
+###Test React Hot Reload
 
 - Open http://127.0.0.1:1337
 - JS console should display:
@@ -61,8 +61,32 @@ chunk    {0} server.js (main) 730 bytes [rendered]
 webpack building...
 webpack built c6e36e439433802ac7b7 in 304ms
 ```
+###Test Express Hot Reload
+- Open http://127.0.0.1:1337/test - application should display *Hello, Hot Reload!*
+- Open http://localhost:1337/api - application should return json response: 
+```js
+{"message":"Calling API"}
+```
+- Modify *src/server.js* and save:
+```javascript
+...
+app.get('/test', function(req, res) {
+  res.send('Hello, Hot Reload Again!')
+})
+...
+```
+- Server console logs:
+```
+[23:32:07] Starting 'build-backend'...
+[23:32:07] Finished 'build-backend' after 7.32 ms
+[23:32:07] [webpack] Time: 29ms
+chunk    {0} server.js (main) 736 bytes [rendered]
+```
+- Refresh http://127.0.0.1:1337/test and see updated message
+- Modify *src/api.js*, refresh http://localhost:1337/api and see updated response
+- React hot reload still works
 
-##Distribution package
+##Distribution Package
 
 To bundle the application for deployment, use dist task:
 
@@ -86,7 +110,7 @@ $
 
 Application is bundled to **build/** folder. Client code and static assets are in **build/static/**.
 
-##How it works
+##How it Works
 
 ##src/server.js
 
