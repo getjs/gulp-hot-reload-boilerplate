@@ -27,6 +27,43 @@ webpack built 2887a3587be1d379be56 in 4468ms
 ```
 The program keeps running, as it watches for changes.
 
+###Test React hot reload
+
+- Open http://127.0.0.1:1337
+- JS console should display:
+```
+[HMR] connected
+```
+- Application should display message from *src/App.js*: This is App!
+- Modify *src/App.js* to change display message:
+```javascript
+...
+<div>This is App! How do you do?</div>
+...
+```
+- Save the file. Browser should update the display message *WITHOUT* refreshing the page.
+- JS console should log:
+```
+client.js:103 [HMR] bundle rebuilding
+client.js:105 [HMR] bundle rebuilt in 320ms
+process-update.js:27 [HMR] Checking for updates on the server...
+index.js:107 [React Transform HMR] Patching _$Unknown
+process-update.js:74 [HMR] Updated modules:
+process-update.js:76 [HMR]  - ./src/App.js
+process-update.js:81 [HMR] App is up to date.
+```
+- Server console should log:
+```
+[23:21:48] Starting 'build-backend'...
+[23:21:48] Finished 'build-backend' after 6.27 ms
+[23:21:48] [webpack] Time: 41ms
+chunk    {0} server.js (main) 730 bytes [rendered]
+webpack building...
+webpack built c6e36e439433802ac7b7 in 304ms
+```
+
+##Distribution package
+
 To bundle the application for deployment, use dist task:
 
 ```bash
